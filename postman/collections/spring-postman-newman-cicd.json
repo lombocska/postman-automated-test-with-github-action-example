@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "83d913e9-0a46-4af1-b623-1899aba2df24",
+		"name": "spring-postman-newman-cicd",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "18840805-83d913e9-0a46-4af1-b623-1899aba2df24"
+	},
+	"item": [
+		{
+			"name": "findByName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be1305c3-9d34-4859-8c67-5b6f8b93dc13",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Country found by name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData._embedded.countries[0].name).to.eq(\"USA\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "e91b9208-c98d-44f2-b653-1a6ada9f230d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/countries/search/findByName?name=USA",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"countries",
+						"search",
+						"findByName"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "USA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAll",
+			"id": "7b154f61-4851-4346-ae87-4468fbb67045",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/countries",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"countries"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "679ecb21-ab1d-4839-b72e-1f72b106872d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "966fa44d-a1cf-49fd-b637-1c7efa8d2aa4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "ec709674-df39-42ed-b3a6-28f406bda82e",
+			"key": "url",
+			"value": "localhost:8081",
+			"type": "string"
+		}
+	]
+}
